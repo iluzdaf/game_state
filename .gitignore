@@ -1,0 +1,18 @@
+# Build artifacts
+build/
+CMakeFiles/
+CMakeCache.txt
+Makefile
+*.o
+*.obj
+*.exe
+*.out
+
+# Editor stuff
+.vscode/
+.idea/
+.vs/
+
+# OS clutter
+.DS_Store
+Thumbs.db
