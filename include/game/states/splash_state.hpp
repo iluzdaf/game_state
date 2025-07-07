@@ -15,7 +15,7 @@ public:
 
     void onEnter() override
     {
-        splashTexture = std::make_unique<Texture2D>("../assets/textures/man_on_a_beach_logo.jpg");
+        splashTexture = std::make_unique<Texture2D>("../../assets/textures/man_on_a_beach_logo.jpg");
     }
 
     void onExit() override
