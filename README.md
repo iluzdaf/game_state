@@ -8,7 +8,7 @@ You'll learn how to implement a flexible game state system using modern C++, des
 
 You might wonder: why not just use a big `switch` statement to manage game states?
 
-Technically, you could write code like this:
+Technically, you can write code like this:
 
 ```cpp
 switch (gameState)
@@ -94,35 +94,75 @@ All states inherit from `GameState`. The `StateStack` handles transitions. Here'
 ## Setup Instructions
 
 1. Install dependencies if needed:
-    - CMake
-    - git-lfs
+    - CMake — for building the project
+    - git-lfs — for downloading large assets stored in Git LFS
+
+    For macOS and Linux, use your package manager of choice.
+
+    For Windows, make sure CMake and Git for Windows are installed in Visual Studio via:
+
+    ```markdown
+    Tools and Features -> Individual Components
+    ```
 
 2. Clone the repository:
 
+    For macOS and Linux,
+
     ```bash
-    git clone <your-repo-url>
+    git clone https://github.com/iluzdaf/game_state.git
+    git submodule update --init --recursive
     ```
 
+    For Windows, use the Visual Studio UI or your favourite git client.
+
 3. Build the project:
+
+    For macOS and Linux,
 
     ```bash
     mkdir build
     cd build
-    cmake ..
+
+    # Debug build
+
+    mkdir debug
+    cd debug
+    cmake ../.. -DCMAKE_BUILD_TYPE=Debug
+    cmake --build .
+    cd ..
+
+    # Release build
+
+    mkdir release
+    cd release
+    cmake ../.. -DCMAKE_BUILD_TYPE=Release
     cmake --build .
     ```
 
+    For Windows,
+    - once you open the repository folder using Visual Studio, it will automatically detect the CMake settings and setup the project folder accordingly.
+    - You can choose **Debug** or **Release** in the dropdown near the Run button.
+
 4. Run tests:
+
+    For macOS and Linux,
 
     ```bash
     ./gamestate_tests
     ```
 
+    For Windows, choose the project in the Visual Studio **Startup Project** selector near the run button and run it.
+
 5. Run the game executable:
+
+    For macOS and Linux,
 
     ```bash
     ./gamestate 
     ```
+
+    For Windows, choose the project in the Visual Studio Project selector near the run button and run it.
 
 ## Practical Exercise Instructions
 
@@ -169,7 +209,7 @@ You’ll need to implement:
 
 - `push()` - Should add a new state on top of the stack without discarding the previous state.
 - `pop()` - Should remove the current top state and reveal the state beneath.
-- `replace()` - Should replacing the current state with a new one.
+- `replace()` - Should replace the current state with a new one.
 - Proper calling of lifecycle methods:
   - `onEnter()` — called when a state becomes active.
   - `onExit()` — called when a state is removed from the stack.
@@ -201,8 +241,8 @@ Happy coding! 🚀
 
 Try these if you finish early!
 
-- Implement `StateStack::clear()`
-- Test render order
+- Try implementing `StateStack::clear()`
+- Try writing a test for render order
 
 ## FAQ
 
