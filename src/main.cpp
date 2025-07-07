@@ -6,6 +6,7 @@ int main()
     try
     {
         Game game;
+        game.initialize();
         game.run();
     }
     catch (const std::exception &e)

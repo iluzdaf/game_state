@@ -1,16 +1,6 @@
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/matchers/catch_matchers_string.hpp>
 #include "game/game.hpp"
-#include "game/states/state_stack.hpp"
-
-class TestGame : public Game
-{
-public:
-    TestGame()
-    {
-        stateStack.pop();
-    }
-};
 
 class DummyState : public GameState
 {
@@ -122,7 +112,7 @@ TEST_CASE("StateStack replace", "[StateStack]")
 
 TEST_CASE("StateStack calls onEnter once when pushing a state", "[StateStack]")
 {
-    TestGame game;
+    Game game;
     bool enteredFlag = false;
     int onEnterCallCount = 0;
     auto state = std::make_unique<DummyState>(
@@ -136,7 +126,7 @@ TEST_CASE("StateStack calls onEnter once when pushing a state", "[StateStack]")
 
 TEST_CASE("StateStack calls onPause once on top state when pushing a state", "[StateStack]")
 {
-    TestGame game;
+    Game game;
     bool pausedFlag = false;
     int pauseCallCount = 0;
     auto state = std::make_unique<DummyState>(
@@ -152,7 +142,7 @@ TEST_CASE("StateStack calls onPause once on top state when pushing a state", "[S
 
 TEST_CASE("StateStack calls onExit once when popping a state", "[StateStack]")
 {
-    TestGame game;
+    Game game;
     bool exitedFlag = false;
     int onExitCallCount = 0;
     auto state = std::make_unique<DummyState>(
@@ -168,7 +158,7 @@ TEST_CASE("StateStack calls onExit once when popping a state", "[StateStack]")
 
 TEST_CASE("StateStack calls onResume once on top state when popping a state", "[StateStack]")
 {
-    TestGame game;
+    Game game;
     bool resumedFlag = false;
     int resumeCallCount = 0;
     auto state = std::make_unique<DummyState>(
@@ -185,7 +175,7 @@ TEST_CASE("StateStack calls onResume once on top state when popping a state", "[
 
 TEST_CASE("StateStack calls onExit on top state when replacing a state", "[StateStack]")
 {
-    TestGame game;
+    Game game;
     bool exitedFlag = false;
     int onExitCallCount = 0;
     auto state = std::make_unique<DummyState>(
@@ -201,7 +191,7 @@ TEST_CASE("StateStack calls onExit on top state when replacing a state", "[State
 
 TEST_CASE("StateStack calls onEnter on new state when replacing a state", "[StateStack]")
 {
-    TestGame game;
+    Game game;
     bool enteredFlag = false;
     int onEnterCallCount = 0;
     auto state = std::make_unique<DummyState>(
@@ -274,7 +264,7 @@ public:
 
 TEST_CASE("StateStack replace transition pops old state and pushes new state", "[StateStack]")
 {
-    TestGame game;
+    Game game;
     bool firstExited = false,
          secondEntered = false;
     auto firstState = std::make_unique<ReplaceRequestingState>(
@@ -322,7 +312,7 @@ public:
 
 TEST_CASE("StateStack pop transition pops the current state", "[StateStack]")
 {
-    TestGame game;
+    Game game;
     bool exitedFlag = false;
     auto state = std::make_unique<PopRequestingState>(
         game, nullptr, &exitedFlag);
@@ -335,7 +325,7 @@ TEST_CASE("StateStack pop transition pops the current state", "[StateStack]")
 
 TEST_CASE("StateStack pop transition resumes the previous state", "[StateStack]")
 {
-    TestGame game;
+    Game game;
     bool resumedFlag = false;
     int resumeCallCount = 0;
     auto firstState = std::make_unique<DummyState>(
@@ -409,7 +399,7 @@ public:
 
 TEST_CASE("StateStack push transition pushes a new state", "[StateStack]")
 {
-    TestGame game;
+    Game game;
     bool firstEntered = false, firstExited = false, firstPaused = false,
          secondEntered = false;
     auto firstState = std::make_unique<PushRequestingState>(
@@ -429,7 +419,7 @@ TEST_CASE("StateStack push transition pushes a new state", "[StateStack]")
 
 TEST_CASE("StateStack renders all states", "[StateStack]")
 {
-    TestGame game;
+    Game game;
     bool renderedFlag1 = false;
     bool renderedFlag2 = false;
     auto state1 = std::make_unique<DummyState>(
@@ -448,7 +438,7 @@ TEST_CASE("StateStack renders all states", "[StateStack]")
 
 TEST_CASE("StateStack updates the top state", "[StateStack]")
 {
-    TestGame game;
+    Game game;
     bool updatedFlag1 = false;
     bool updatedFlag2 = false;
     auto state1 = std::make_unique<DummyState>(

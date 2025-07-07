@@ -15,10 +15,11 @@ public:
     std::unique_ptr<GameState> makeOptionsState();
     void setFullscreen(bool fullscreen);
     StateStack &getStateStack();
+    void initialize();
 
 protected:
-    void initGLFW(int windowWidth, int windowHeight);
-    void initGlad();
+    void setupGLFW(int windowWidth, int windowHeight);
+    void setupGlad();
     void update(float deltaTime);
     void render();
     void resize(int width, int height);

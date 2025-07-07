@@ -7,18 +7,6 @@
 
 Game::Game()
 {
-    srand(static_cast<unsigned int>(time(nullptr)));
-
-    initGLFW(800, 600);
-
-    initGlad();
-
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-    imGuiManager = std::make_unique<ImGuiManager>(window, 800, 600);
-
-    stateStack.push(std::make_unique<LoadingState>(*this));
 }
 
 Game::~Game()
@@ -49,7 +37,7 @@ void Game::run()
     }
 }
 
-void Game::initGLFW(int windowWidth, int windowHeight)
+void Game::setupGLFW(int windowWidth, int windowHeight)
 {
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -58,7 +46,7 @@ void Game::initGLFW(int windowWidth, int windowHeight)
 
     window = glfwCreateWindow(windowWidth, windowHeight, "gamestate", NULL, NULL);
     if (!window)
-        throw std::runtime_error("Failed to create window");
+        throw std::runtime_error("Failed to create glfw window");
 
     glfwMakeContextCurrent(window);
 
@@ -72,10 +60,26 @@ void Game::initGLFW(int windowWidth, int windowHeight)
             game->resize(windowWidth, windowHeight); });
 }
 
-void Game::initGlad()
+void Game::setupGlad()
 {
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-        throw std::runtime_error("Failed to initialize GLAD");
+        throw std::runtime_error("Failed to setup GLAD");
+}
+
+void Game::initialize()
+{
+    srand(static_cast<unsigned int>(time(nullptr)));
+
+    setupGLFW(800, 600);
+
+    setupGlad();
+
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+    imGuiManager = std::make_unique<ImGuiManager>(window, 800, 600);
+
+    stateStack.push(std::make_unique<LoadingState>(*this));
 }
 
 void Game::update(float deltaTime)
