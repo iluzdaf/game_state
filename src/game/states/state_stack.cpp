@@ -1,3 +1,4 @@
+#include <stdexcept>
 #include "game/states/state_stack.hpp"
 
 void StateStack::push(std::unique_ptr<GameState> state)
