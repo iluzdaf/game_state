@@ -35,8 +35,8 @@ However, this approach quickly becomes difficult to manage, because:
 2. Resource management is harder.
     - Certain states need specific assets (textures, sounds, data).
     - A state system ensures that:
-    - resources load only when needed
-    - and can be cleaned up when the state exits
+      - resources load only when needed
+      - and can be cleaned up when the state exits
 
 3. Encapsulation improves maintainability.
     - Each game state becomes its own class.
@@ -84,8 +84,8 @@ All states inherit from `GameState`. The `StateStack` handles transitions. Here'
 ┌────────┐
 │  Play  │
 └────────┘
-      │
-      ▼
+    ▲  │
+    │  ▼
 ┌─────────┐
 │ Options │ (Overlay on top of Play)
 └─────────┘
@@ -178,9 +178,13 @@ In this exercise, you’ll be implementing a flexible state management system by
   - **All states are rendered** each frame. This allows visual overlays—for example, `OptionsState` can render on top while still showing the `PlayState` underneath.
 - The concrete `GameStates` are already implemented.
 
+![Starting Point](https://media.giphy.com/media/FweEi5KvATPgeBRxTu/giphy.gif)
+
 ### What You Need to Do
 
 Your goal is to modify the StateStack so that it behaves like a proper stack of states.
+
+![Goal](https://media.giphy.com/media/geEujqfCVFwmCVItus/giphy.gif)
 
 Follow these steps:
 
@@ -243,6 +247,8 @@ Try these if you finish early!
 
 - Try implementing `StateStack::clear()`
 - Try writing a test for render order
+- Think about how you could serialize GameState for save games or persistent sessions
+- Research other methods of managing game flow (Scene Graphs, Entity-Component System)
 
 ## FAQ
 
@@ -417,5 +423,19 @@ void StateStack::replace(std::unique_ptr<GameState> state)
 ## Credits
 
 - Man on a Beach logo created with Canva. [https://www.canva.com](https://www.canva.com)
+
+## 📝 License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+Feel free to use, modify, and distribute in your own projects!
+
+## ❓ Questions or Feedback
+
+Feel free to reach out if you have questions or suggestions:
+
+📧 **Email:** <muhammad_fadzuli_mohamad_said@myaccount.nyp.edu.sg>
+
+Happy coding! 🚀
 
 ---

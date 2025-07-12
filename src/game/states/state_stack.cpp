@@ -3,6 +3,7 @@
 
 void StateStack::push(std::unique_ptr<GameState> state)
 {
+    stack.clear();
     stack.push_back(std::move(state));
 }
 
